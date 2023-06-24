@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 const eventRoutes = require('./Routes/eventRoutes')
-
+const userRoutes = require('./Routes/userRoutes')
 const app = express()
 
 app.use(express.json())
@@ -14,6 +14,7 @@ app.use((req,res,next) => {
 })
 
 app.use('/api/event', eventRoutes)
+app.use('/api/user', userRoutes)
 
 mongoose.connect(process.env.MONG_URI)
     .then( () => {
