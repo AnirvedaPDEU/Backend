@@ -7,16 +7,21 @@ const {
     deleteEvent
 } = require('../Controllers/eventController')
 
+const {
+    userAdmin,
+    userSuperAdmin
+} = require('../MiddleWare/middleware')
+
 const router = express.Router()
 
 router.get('/', getEvent)
 
 router.get('/:id', getSingleEvent)
 
-router.post('/', addEvent)
+router.post('/', userAdmin(['Admin', 'SuperAdmin']),addEvent)
 
-router.patch('/:id', updateEvent)
+router.patch('/:id',userAdmin(['Admin', 'SuperAdmin']), updateEvent)
 
-router.delete('/:id', deleteEvent)
+router.delete('/:id',userAdmin(['Admin', 'SuperAdmin']), deleteEvent)
 
 module.exports = router
